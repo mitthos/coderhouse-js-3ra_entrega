@@ -1,0 +1,33 @@
+country_data = `[
+    {
+        "country": "Argentina",
+        "strLeague": "Argentinian Primera Division",
+        "strSport": "Soccer",
+        "strLeagueAlternate": "Liga Profesional de Fútbol"
+    },
+    {
+        "country": "Brasil",
+        "strLeague": "Brazilian Serie A",
+        "strSport": "Soccer",
+        "strLeagueAlternate": "Liga Brasileña de Futbol"
+    },
+    {
+        "country": "Chile",
+        "strLeague": "Chile Primera Division",
+        "strSport": "Soccer",
+        "strLeagueAlternate": "Chilean Primera División"
+    },
+    {
+        "country": "Colombia",
+        "strLeague": "Colombia Categoría Primera A",
+        "strSport": "Soccer",
+        "strLeagueAlternate": "Primera Division de Colombia"
+    },
+    {
+        "country": "Perú",
+        "strLeague": "Peruvian Primera Division",
+        "strSport": "Soccer",
+        "strLeagueAlternate": "Torneo Descentralizado de Fútbol Profesional, Liga 1, Copa Movistar"
+    }
+
+]`;

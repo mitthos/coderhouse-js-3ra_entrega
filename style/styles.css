@@ -1,0 +1,310 @@
+body {
+  background-color: #0F0F0F;
+}
+
+.container-fluid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 2fr 0.5fr 1.5fr 4fr 1fr;
+  gap: 10px 15px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "head head head"
+    "menu menu menu"
+    "brand core cart"
+    "verticalMenu core cart"
+    "foot foot foot";
+  height: 100%;
+
+}
+
+.head {
+  background-color: #232D3F;
+  grid-area: head;
+  border: 3px solid #008170;
+  border-radius: 10px;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.banner {
+  height: 15rem;
+  width: 80%;
+}
+
+.marca {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 2rem;
+}
+
+.navbar {
+  background-color: #232D3F;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar .container {
+  margin: 0px;
+  padding: 0px;
+}
+
+.menu .navbar-nav .nav-link:hover,
+.menu .navbar-nav .dropdown-item:hover,
+.menu .navbar-nav .dropdown-item::before {
+  background-color: #008170;
+  border-radius: 5px;
+}
+
+.dropdown-item,
+.dropdown-item:hover,
+.dropdown-item::before {
+  color: white;
+  background-color: #005B41;
+  border-radius: 5px;
+}
+
+.dropdown-menu {
+  background-color: #005B41;
+  border-radius: 5px;
+}
+
+.menu {
+  background-color: #232D3F;
+  grid-area: menu;
+  border: 3px solid #008170;
+  border-radius: 10px;
+}
+
+.brand {
+  background-color: #232D3F;
+  grid-area: brand;
+  border: 3px solid #008170;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand img {
+  height: 15rem;
+  width: 15rem;
+}
+
+.core {
+  background-color: #232D3F;
+  grid-area: core;
+  border: 3px solid #008170;
+  border-radius: 10px;
+  padding: 20px;
+  height: 100%;
+}
+.coreText{
+  color: white;
+}
+
+.verticalMenu {
+  background-color: #232D3F;
+  grid-area: verticalMenu;
+  border: 3px solid #008170;
+  border-radius: 10px;
+}
+
+.accordion {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.accordion-item:not(.accordion-item:first-child):not(:hover) .accordion-header button.accordion-button {
+  background-color: #008170;
+  color: white;
+}
+
+.accordion-item:not(:first-child):not(:hover) .accordion-header button.accordion-button {
+  background-color: #232D3F;
+  color: white;
+}
+
+.accordion-item:not(:hover) .accordion-button {
+  background-color: #008170;
+  color: white;
+}
+
+.accordion-item .accordion-body {
+  background-color: #008170;
+}
+
+.accordion-item .accordion-header {
+  background-color: blue;
+  color: white;
+}
+
+.accordion-item .accordion-button:hover,
+.accordion-item .accordion-button[aria-expanded="true"] {
+  background-color: #232D3F;
+  color: white;
+}
+
+.cart {
+  background-color: #232D3F;
+  grid-area: cart;
+  border: 3px solid #008170;
+  border-radius: 10px;
+  padding: 5px;
+}
+.monto{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fill-available;
+  margin-top: 5px;
+}
+.custom-input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.custom-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.custom-input button {
+  padding: 8px 12px;
+  background-color: #008170;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.foot {
+  background-color: #232D3F;
+  grid-area: foot;
+  border: 3px solid #008170;
+  border-radius: 10px;
+}
+
+.colorText {
+  color: white !important;
+}
+
+.text-team {
+  text-align: left;
+}
+
+.card-container {
+  max-height: 500px;
+  /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto;
+  /* Agrega un scroll vertical si es necesario */
+}
+
+.read-more-content {
+  max-height: 0;
+  /* Inicialmente oculta el contenido completo */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in;
+  /* Agrega una transición suave al cambiar la altura */
+}
+
+.read-more-show {
+  max-height: none;
+  /* Muestra el contenido completo al activarse */
+}
+
+.small-text {
+  font-size: xx-small;
+}
+
+.apuesta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: grey;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+.factores{
+  display: flex;
+  justify-content: space-around;
+  width: -webkit-fill-available;
+  margin-top: 5px;
+}
+
+.apuesta img {
+  width: 15px;
+  height: 15px;
+}
+
+.equipo1 span,
+.equipo2 span,
+.vs {
+  color: white;
+}
+.equipo1, .equipo2, .vs{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-direction: column;
+  justify-items: center;
+  text-align: center;
+  font-size: x-small;
+  flex-wrap: wrap;
+  width: 33%;
+}
+
+.match {
+  font-size: small;
+}
+.match img {
+  width: 30px;
+  height: 30px;
+}
+
+.factor {
+  display: flex;
+  background-color: grey;
+  align-items: center;
+  gap: 5px;
+  flex-direction: column;
+  justify-items: center;
+  text-align: center;
+  font-size: small;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.factor span {
+  text-align: center;
+}
+
+.buttons-side {
+  margin-top: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+
+.accordion-country {
+  background-color: #008170;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
