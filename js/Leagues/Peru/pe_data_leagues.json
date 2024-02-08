@@ -1,5 +1,5 @@
 
-pe_data_leagues=` [
+[
     {
         "idLeague": "4688",
         "idSoccerXML": null,
@@ -98,4 +98,4 @@ pe_data_leagues=` [
         "strComplete": null,
         "strLocked": "unlocked"
     }
-]`
+]

@@ -1,5 +1,4 @@
-
-ar_data_teams = ` [
+[
     {
         "idTeam": "137769",
         "idSoccerXML": null,
@@ -3350,4 +3349,4 @@ ar_data_teams = ` [
         "strYoutube": "www.youtube.com/user/ClubColonOficial",
         "strLocked": "unlocked"
     }
-]`
+]

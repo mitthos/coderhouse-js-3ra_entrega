@@ -1,4 +1,4 @@
-let ar_leagues, br_leagues, cl_leagues, co_leagues, pe_leagues = [];
+// let ar_leagues, br_leagues, cl_leagues, co_leagues, pe_leagues = [];
 
 class Equipo {
     constructor(id, nombre, escudo) {
@@ -14,20 +14,21 @@ class Equipo {
 }
 
 class Apuesta {
-    constructor(pais, equipo1, equipo2, resultado, factor){
+    constructor(pais, equipo1, equipo2, resultado, factor, id){
         this.pais = pais;
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
         this.resultado = resultado;
         this.factor = factor;
+        this.id = id;
     }
 
 }
  
- const loadCountries = ()=> {
+ const loadCountries = async ()=> {
     //Cargar Paises del acordeon
     let countries = new Array;
-    countries = getCountries();
+    countries = await getCountries();
 
 
     const divAcordeon = document.getElementById("accordionLeague");
@@ -75,9 +76,13 @@ class Apuesta {
     delBets.appendChild(anchorDelete)
  }
 
- const getCountries = () => {
-    let countries = [];
-    countries = JSON.parse(country_data);
+ const getCountries = async () => {
+    // let countries = [];
+    // countries = JSON.parse(country_data);
+
+    const response = await fetch("./js/data_leagues.json")
+    countries = await response.json()
+
 
     return countries;
     
@@ -99,11 +104,11 @@ class Apuesta {
     renderDetalleApuestas();
  }
 
- const renderByCountry = (country) =>{
+ const renderByCountry = async (country) =>{
 
     limpiarCore();
 
-    let teams = getTeams(country.country)
+    let teams = await getTeams(country.country)
     const divcontenedor = document.getElementById("container-core");
 
     
@@ -145,9 +150,9 @@ class Apuesta {
     
  }
 
- const modalSetup = (filter) => {
+ const modalSetup = async (filter) => {
     const arrFilter = filter.split("-");
-    const teams = getTeams(arrFilter[0]);
+    const teams = await getTeams(arrFilter[0]);
     const teams_filter = teams.filter(item => item.idTeam === arrFilter[1])
 
     const team = teams_filter[0]
@@ -155,78 +160,78 @@ class Apuesta {
     document.getElementById("modalBody").innerHTML = team.strDescriptionEN
  }
 
- const getLeagues = (country) =>{
+ const getLeagues = async (country) =>{
     let leagues = [];
+    let path_league = ""
     switch(country){
         case "Argentina": {
-            leagues = JSON.parse(ar_data_leagues);
-            leagues.sort((a,b) => {
-                return a.intDivision - b.intDivision;
-            });
+            // leagues = JSON.parse(ar_data_leagues);
+            path_league = "./js/Leagues/Argentina/ar_data_leagues.json"
             break;
         }
-        case "Brasil" : {
-            leagues = JSON.parse(br_data_leagues);
-            leagues.sort((a,b) => {
-                return a.intDivision - b.intDivision;
-            });
+        case "Brazil" : {
+            path_league = "./js/Leagues/Brasil/br_data_leagues.json"
             break;
         }
         case "Chile" :{
-            leagues = JSON.parse(cl_data_leagues);
-            leagues.sort((a,b) => {
-                return a.intDivision - b.intDivision;
-            });
+            path_league = "./js/Leagues/Chile/cl_data_leagues.json"
             break;
         }
         case "Colombia" :{
-            leagues = JSON.parse(co_data_leagues);
-            leagues.sort((a,b) => {
-                return a.intDivision - b.intDivision;
-            });break;
+            path_league = "./js/Leagues/Colombia/co_data_leagues.json"
+            break;
         }
         case "Perú" :{
-            leagues = JSON.parse(pe_data_leagues);
-            leagues.sort((a,b) => {
-                return a.intDivision - b.intDivision;
-            });
+            path_league = "./js/Leagues/Peru/pe_data_leagues.json"
             break;
         }
 
     }
+
+    const response = await fetch(path_league)
+    leagues = await response.json()
+
+    leagues.sort((a,b) => {
+        return a.intDivision - b.intDivision;
+    });
+
     return leagues;
  }
 
- const getTeams = (country) =>{
+ const getTeams = async (country) =>{
     let teams = [];
+    let path_team = ""
     switch(country){
         case "Argentina": {
-            teams = JSON.parse(ar_data_teams);
+            path_team = "./js/Leagues/Argentina/ar_data_teams.json"
             break;
         }
-        case "Brasil" : {
-            teams = JSON.parse(br_data_teams);
+        case "Brazil" : {
+            path_team = "./js/Leagues/Brasil/br_data_teams.json"
             break;
         }
         case "Chile" :{
-            teams = JSON.parse(cl_data_teams);
+            path_team = "./js/Leagues/Chile/cl_data_teams.json"
             break;
         }
         case "Colombia" :{
-            teams = JSON.parse(co_data_teams);
+            path_team = "./js/Leagues/Colombia/co_data_teams.json"
             break;
         }
         case "Perú" :{
-            teams = JSON.parse(pe_data_teams);
+            path_team = "./js/Leagues/Peru/pe_data_teams.json"
             break;
         }
 
     }
+
+    const response = await fetch(path_team)
+    teams = await response.json()
     return teams;
  }
 
- const loadLeagues = (country)=> {
-    const leagues = getLeagues(country);
+ const loadLeagues = async (country)=> {
+    const leagues = await getLeagues(country);
     
     // return leagues;
     const divNode = document.getElementById("accordion-body-"+country);
@@ -252,10 +257,10 @@ const loadPage = ()=> {
     renderDetalleApuestas();
 } 
 
-const loadDetails = (idLeague, country) => {
+const loadDetails = async (idLeague, country) => {
     limpiarCore();
     
-    const teams = getTeams(country);
+    const teams = await getTeams(country);
     const teams_filter = teams.filter(item => item.idLeague === idLeague)
 
     const arrTeams = []
@@ -278,34 +283,35 @@ const loadDetails = (idLeague, country) => {
 
     
 
-    for (let i = 1; i <= equipos; i = i+2 ){
+    for (let i = 0; i < equipos; i = i+2 ){
         const divRow = document.createElement("div");
 
 
-        const match = `${country}-${arrTeams[i].id}-${arrTeams[i+1].id}`
+        const match = `${country}-${arrTeams[i]?.id}-${arrTeams[i+1]?.id}`
 
         divRow.className ="apuesta match"
         // divRow.addEventListener("click", ()=> matchSelection(match));
 
         const factorPromedio = (arrTeams[i].factor + arrTeams[i+1].factor) / 2
         
-        divRow.innerHTML = `<div class="equipo1">
-                            <img src="${arrTeams[i].escudo}" alt="logo1">
-                            <span>${arrTeams[i].nombre}</span>
-                        </div>
-                        <div class="vs">
-                            <span>VS</span>
-                        </div>
-                        <div class="equipo2">
-                            <img src="${arrTeams[i+1].escudo}" alt="logo1">
-                        <span>${arrTeams[i+1].nombre}</span>
-                        </div>
-                        <div class = "factores">
-                            
-                            <div class="btn btn-sm bg-secondary local">L: ${arrTeams[i].factor}</div>
-                            <div class="btn btn-sm  bg-secondary empate">E: ${factorPromedio}</div>
-                            <div class="btn btn-sm  bg-secondary visita">V: ${arrTeams[i+1].factor}</div>
-                        </div>`
+        divRow.innerHTML = `<div class="equipos">
+                                <div class="equipo1">
+                                    <img src="${arrTeams[i].escudo}" alt="logo1">
+                                    <span>${arrTeams[i].nombre}</span>
+                                </div>
+                                <div class="vs">
+                                    <span>VS</span>
+                                </div>
+                                <div class="equipo2">
+                                    <img src="${arrTeams[i+1].escudo}" alt="logo1">
+                                    <span>${arrTeams[i+1].nombre}</span>
+                                </div>
+                            </div>
+                            <div class = "factores">
+                                <div class="btn btn-sm bg-secondary local">L: ${arrTeams[i].factor}</div>
+                                <div class="btn btn-sm  bg-secondary empate">E: ${factorPromedio}</div>
+                                <div class="btn btn-sm  bg-secondary visita">V: ${arrTeams[i+1].factor}</div>
+                            </div>`
         
         divRow.getElementsByClassName('local')[0].addEventListener("click", ()=> matchSelection(match+"-L-"+arrTeams[i].factor));
         divRow.getElementsByClassName('empate')[0].addEventListener("click", ()=> matchSelection(match+"-E-"+factorPromedio));
@@ -316,12 +322,15 @@ const loadDetails = (idLeague, country) => {
     
 }
 
+const getBetId = () => JSON.parse(localStorage.getItem('bets'))?JSON.parse(localStorage.getItem('bets')).length + 1:1;
+
 const matchSelection = (match) => {
     console.log(match)
     const arrMatch = match.split("-");
     console.log(arrMatch);
     const factor1 = Math.random() * 10
     console.log(factor1)
+    const id = getBetId();
 
     const country = arrMatch[0]
     const team1 = arrMatch[1]
@@ -331,14 +340,14 @@ const matchSelection = (match) => {
     
 
     /*Agregar datos al storage*/
-    const bet = new Apuesta(country, team1, team2, selection, factor)
+    const bet = new Apuesta(country, team1, team2, selection, factor, id)
     let repetido = false
 
     if (localStorage.length > 0) {
         const bets = localStorage.getItem("bets")
         const arrLS = JSON.parse(bets);
         
-        arrLS.forEach(lsItem => {
+        arrLS?.forEach(lsItem => {
             if (bet.pais === lsItem.pais 
                 && bet.equipo1 === lsItem.equipo1 
                 && bet.equipo2 === lsItem.equipo2 
@@ -347,7 +356,7 @@ const matchSelection = (match) => {
         })
 
         if (!repetido) {
-            arrLS.push(bet);
+            arrLS?.push(bet);
             localStorage.removeItem(bets)
             localStorage.setItem('bets', JSON.stringify(arrLS))
 
@@ -386,18 +395,22 @@ const confirmarMonto = (id) => {
     validarMonto(input);
 }
 
-
-const renderBets = () => {
+const renderBets = async () => {
 
     limpiarBets();
 
     let arrLS = new Array()
     arrLS = JSON.parse(localStorage.getItem("bets"));
+    if (arrLS === null) {
+        arrLS = new Array()
+    }
 
-    arrLS?.forEach(bet => {
+    for (bet of arrLS) 
+    // arrLS?.forEach(bet => 
+    {
         const country = bet.pais
         const selection = bet.resultado
-        const arrTeams = getTeams(country)
+        const arrTeams = await getTeams(country)
          
         const teamNode1 = arrTeams.filter(item => item.idTeam === bet.equipo1)
         const teamNode2 = arrTeams.filter(item => item.idTeam === bet.equipo2)
@@ -423,34 +436,62 @@ const renderBets = () => {
         // const apuesta = document.getElementsByClassName("cart")[0];
         const apuesta = document.getElementById("bet-list");
         const divApuesta = document.createElement("div");
-        divApuesta.className = "apuesta"
-        divApuesta.innerHTML = `<div class="equipo1">
-                            <img src="${teamNode1[0].strTeamBadge}" alt="logo1">
-                            <span>${teamNode1[0].strTeam}</span>
-                        </div>
-                        <div class="vs">
-                            <span>VS</span>
-                        </div>
-                        <div class="equipo2">
-                            <img src="${teamNode2[0].strTeamBadge}" alt="logo1">
-                        <span>${teamNode2[0].strTeam}</span>
-                        </div>
-                        <div class = "factores">
-                            <div class="badge bg-secondary local">${resultado}</div>
-                        </div>
-                        <div class="monto">
-                            <div class="custom-input">
-                            <input type="number" class="form-control" id="${montoId}" placeholder="10000">
-                            <button type="button" onclick='confirmarMonto("${montoId}")'>Confirmar</button>
-                        </div>
-                        </div>
-                        </div>
+        divApuesta.className = "apuesta";
+        divApuesta.id = bet.id;
+        divApuesta.innerHTML = `<div class="deleteIcon">
+                                    <i class="bi bi-x-circle-fill deleteIcon"></i>
+                                </div>
+                                <div class="partido">
+                                    <div class="equipo1">
+                                        <img src="${teamNode1[0].strTeamBadge}" alt="logo1">
+                                        <span>${teamNode1[0].strTeam}</span>
+                                    </div>
+                                    <div class="vs">
+                                        <span>VS</span>
+                                    </div>
+                                    <div class="equipo2">
+                                        <img src="${teamNode2[0].strTeamBadge}" alt="logo1">
+                                        <span>${teamNode2[0].strTeam}</span>
+                                    </div>
+                                    <div class = "factores">
+                                        <div class="badge bg-secondary local">${resultado}</div>
+                                    </div>
+                                </div>
+                                <div class="monto">
+                                    <div class="custom-input">
+                                        <input type="number" class="form-control" id="${montoId}" placeholder="10000">
+                                        <button type="button" onclick='confirmarMonto("${montoId}")'>Confirmar</button>
+                                    </div>
+                                </div>
                         `
         apuesta.appendChild(divApuesta);
+        divApuesta.querySelector('.deleteIcon').addEventListener('click', function() {
+            Swal.fire({
+                title: '¿Desea eliminar la apuesta?',
+                text: 'Presione "Eliminar apuesta" si está seguro.',
+                icon: 'warning',
+                iconColor: '#008170',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar apuesta',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#008170'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    const bets = JSON.parse(localStorage.getItem('bets'));
+                    const newBets = bets.filter(bet => String(bet.id) !== divApuesta.id);
+                    localStorage.removeItem('bets');
+                    localStorage.setItem('bets', JSON.stringify(newBets));
+                    divApuesta.remove();
+                    renderDetalleApuestas();
+                } 
+              })
+        });
 
-    })
-    //renderDetalleApuestas();
+    }
+    // )
+    
 }
+
 
 const updateBetCount = () => {
     const countApuestas = document.getElementById('bet-list').childElementCount;
@@ -470,7 +511,7 @@ const renderDetalleApuestas = () => {
     divDetalle.innerHTML = `<div class="card-body">
     <h5 class="card-title">Detalle de apuestas</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">Usted tiene <span id="bet_count">${countApuestas}</span> apuestas </h6>
-    <p class="card-text">Pendiente de mejoras.</p>
+    
   </div>`
     detalle.appendChild(divDetalle);
 }

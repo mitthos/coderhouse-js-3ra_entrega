@@ -1,5 +1,5 @@
 
-ar_data_leagues = `[
+[
     {
         "idLeague": "4616",
         "idSoccerXML": null,
@@ -196,4 +196,4 @@ ar_data_leagues = `[
         "strComplete": null,
         "strLocked": "unlocked"
     }
-]`;
+]

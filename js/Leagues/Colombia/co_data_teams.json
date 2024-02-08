@@ -1,5 +1,4 @@
-
-co_data_teams = ` [
+[
     {
         "idTeam": "137605",
         "idSoccerXML": null,
@@ -2613,4 +2612,4 @@ co_data_teams = ` [
         "strYoutube": "",
         "strLocked": "unlocked"
     }
-]`
+]

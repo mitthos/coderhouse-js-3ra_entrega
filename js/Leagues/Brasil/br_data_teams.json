@@ -1,5 +1,5 @@
 
-br_data_teams = `[
+[
     {
         "idTeam": "142271",
         "idSoccerXML": null,
@@ -3350,4 +3350,4 @@ br_data_teams = `[
         "strYoutube": "",
         "strLocked": "unlocked"
     }
-]`
+]

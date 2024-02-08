@@ -1,5 +1,5 @@
 
-br_data_leagues= `[
+[
     {
         "idLeague": "4625",
         "idSoccerXML": null,
@@ -245,4 +245,4 @@ br_data_leagues= `[
         "strComplete": null,
         "strLocked": "unlocked"
     }
-]`
+]

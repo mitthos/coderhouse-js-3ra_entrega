@@ -229,14 +229,21 @@ body {
 
 .apuesta {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   background-color: grey;
   border-radius: 5px;
   margin-top: 10px;
   margin-left: 5px;
   margin-right: 5px;
   padding: 5px;
+}
+.deleteIcon{
+  display: flex;
+  justify-content: right;
+}
+.partido{
+  display: flex;
+  align-items: center;  
   flex-wrap: wrap;
 }
 .factores{
@@ -245,7 +252,13 @@ body {
   width: -webkit-fill-available;
   margin-top: 5px;
 }
-
+.equipos{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+}
 .apuesta img {
   width: 15px;
   height: 15px;
@@ -307,4 +320,55 @@ body {
   background-color: #008170;
   border-radius: 5px;
   margin-bottom: 5px;
+}
+
+.deleteIcon {
+  color: rgb(202, 66, 66)
+}
+
+.footer {
+  background-color: #232D3F;
+  color: #fff;
+  padding: 50px 0;
+  border: 3px solid #008170;
+}
+
+.footer {
+  background-color: #232D3F;
+  color: #fff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.footer h3 {
+  color: #fff;
+}
+
+.footer p {
+  color: #ccc;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer a:hover {
+  color: #ccc;
+}
+
+.brand {
+  text-align: center;
+}
+
+.footer img {
+  display: inline-block;
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+  max-width: 100%;
+  height: 8rem;
+  width: 8rem;
+  border-radius: 10%;
+}
+
+.footer li {
+  list-style-type: none;
 }

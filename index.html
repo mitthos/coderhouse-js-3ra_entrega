@@ -4,9 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SweetAlert -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="style/styles.css">
   <!--JS-->
@@ -54,7 +58,7 @@
                   <a class="nav-link colorText" href="#">Nosotros</a>
                 </li>
                 <li id="deleteBet" class="nav-item">
-                  
+
                 </li>
               </ul>
             </div>
@@ -63,7 +67,7 @@
       </nav>
     </div>
     <div class="brand">
-      <img src="assets/logo.png" alt="marca" class="rounded-circle img-thumbnail">
+      <img src="assets/logo.png" alt="marca" class="img-thumbnail">
     </div>
     <div class="core">
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -82,16 +86,23 @@
       <div id="container-core" class="container text-center">
         <div class="coreText">
           <h1>Bienvenido a Nuestra Página de Apuestas de Fútbol</h1>
-          <p>¡Bienvenido apasionado del fútbol! En nuestro sitio, experimentarás la emoción y la adrenalina de las apuestas deportivas directamente desde la comodidad de tu hogar.</p>
-  
-          <p>Te ofrecemos una amplia variedad de opciones para apostar en tus equipos favoritos, ligas nacionales e internacionales. Ya seas un fanático casual o un entendido del deporte, encontrarás oportunidades emocionantes para poner a prueba tus conocimientos y pronósticos.</p>
-  
-          <p>Nuestro compromiso es proporcionarte una experiencia de apuestas segura y entretenida. Contamos con las mejores cuotas, información actualizada sobre los equipos y partidos, y un equipo de atención al cliente siempre dispuesto a ayudarte.</p>
-  
-          <p>Explora nuestras secciones, descubre las promociones y sumérgete en la acción del fútbol con nosotros. ¡Estamos emocionados de tenerte aquí y esperamos que disfrutes cada momento en nuestra plataforma de apuestas!</p>
-  
+          <p>¡Bienvenido apasionado del fútbol! En nuestro sitio, experimentarás la emoción y la adrenalina de las
+            apuestas deportivas directamente desde la comodidad de tu hogar.</p>
+
+          <p>Te ofrecemos una amplia variedad de opciones para apostar en tus equipos favoritos, ligas nacionales e
+            internacionales. Ya seas un fanático casual o un entendido del deporte, encontrarás oportunidades
+            emocionantes para poner a prueba tus conocimientos y pronósticos.</p>
+
+          <p>Nuestro compromiso es proporcionarte una experiencia de apuestas segura y entretenida. Contamos con las
+            mejores cuotas, información actualizada sobre los equipos y partidos, y un equipo de atención al cliente
+            siempre dispuesto a ayudarte.</p>
+
+          <p>Explora nuestras secciones, descubre las promociones y sumérgete en la acción del fútbol con nosotros.
+            ¡Estamos emocionados de tenerte aquí y esperamos que disfrutes cada momento en nuestra plataforma de
+            apuestas!</p>
+
           <p>¡Que la suerte esté de tu lado y que cada gol sea una victoria para ti!</p>
-      </div>
+        </div>
       </div>
     </div>
     <div class="verticalMenu">
@@ -100,15 +111,41 @@
       </div>
     </div>
     <div id="bets" class="cart">
-      <div class="card" style="width: 18rem;"" id="detalleApuestas">
-        
+      <div class="card" style="width: 18rem;"" id=" detalleApuestas">
+
       </div>
       <div id="bet-list">
 
       </div>
     </div>
     <div class="foot">
-      <h2>este es el footer</h2>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div>
+                <h3>DeadGambling</h3>
+                <img src="assets/logo.png" alt="Logo DeadGambling" class="logo img-thumbnail ">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <h3>Enlaces Útiles</h3>
+              <ul>
+                <li><a href="#">Términos y Condiciones</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Ayuda y Soporte</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h3>Contacto</h3>
+              <p>Email: contacto@deadgambling.com</p>
+              <p>Teléfono: +123456789</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
     </div>
   </div>
 
@@ -134,19 +171,19 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
   <!--paises-->
-  <script type="text/javascript" src="js/data_leagues.json"></script>
+  <!-- <script type="text/javascript" src="js/data_leagues.json"></script>
   <!--leagues-->
-  <script type="text/javascript" src="js/Leagues/Argentina/ar_data_leagues.json"></script>
+  <!-- <script type="text/javascript" src="js/Leagues/Argentina/ar_data_leagues.json"></script>
   <script type="text/javascript" src="js/Leagues/Brasil/br_data_leagues.json"></script>
   <script type="text/javascript" src="js/Leagues/Chile/cl_data_leagues.json"></script>
   <script type="text/javascript" src="js/Leagues/Colombia/co_data_leagues.json"></script>
-  <script type="text/javascript" src="js/Leagues/Peru/pe_data_leagues.json"></script>
+  <script type="text/javascript" src="js/Leagues/Peru/pe_data_leagues.json"></script> -->
   <!--teams-->
-  <script type="text/javascript" src="js/Leagues/Argentina/ar_data_teams.json"></script>
+  <!-- <script type="text/javascript" src="js/Leagues/Argentina/ar_data_teams.json"></script>
   <script type="text/javascript" src="js/Leagues/Brasil/br_data_teams.json"></script>
   <script type="text/javascript" src="js/Leagues/Chile/cl_data_teams.json"></script>
   <script type="text/javascript" src="js/Leagues/Colombia/co_data_teams.json"></script>
-  <script type="text/javascript" src="js/Leagues/Peru/pe_data_teams.json"></script>
+  <script type="text/javascript" src="js/Leagues/Peru/pe_data_teams.json"></script> --> -->
   <script src="js/index.js"></script>
 </body>
 

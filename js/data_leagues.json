@@ -1,4 +1,4 @@
-country_data = `[
+[
     {
         "country": "Argentina",
         "strLeague": "Argentinian Primera Division",
@@ -6,7 +6,7 @@ country_data = `[
         "strLeagueAlternate": "Liga Profesional de Fútbol"
     },
     {
-        "country": "Brasil",
+        "country": "Brazil",
         "strLeague": "Brazilian Serie A",
         "strSport": "Soccer",
         "strLeagueAlternate": "Liga Brasileña de Futbol"
@@ -30,4 +30,4 @@ country_data = `[
         "strLeagueAlternate": "Torneo Descentralizado de Fútbol Profesional, Liga 1, Copa Movistar"
     }
 
-]`;
+]
