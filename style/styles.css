@@ -372,3 +372,32 @@ body {
 .footer li {
   list-style-type: none;
 }
+
+.deleteIcon {
+  color: rgb(202, 66, 66)
+}
+
+.betDetail{
+  margin: 5px;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+}
+
+.buttonBets{
+  padding: 8px 12px;
+  background-color: #008170;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.buttonBetsCancel{
+  padding: 8px 12px;
+  background-color: grey;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

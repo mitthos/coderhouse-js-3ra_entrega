@@ -14,13 +14,14 @@ class Equipo {
 }
 
 class Apuesta {
-    constructor(pais, equipo1, equipo2, resultado, factor, id){
+    constructor(pais, equipo1, equipo2, resultado, factor, id, monto=0){
         this.pais = pais;
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
         this.resultado = resultado;
         this.factor = factor;
         this.id = id;
+        this.monto = monto;
     }
 
 }
@@ -137,9 +138,6 @@ class Apuesta {
         `
         divCol.appendChild(card)
         divRow.appendChild(divCol)
-        
-        // document.getElementById("exampleModalLabel").innerHTML = team.strTeam
-        // document.getElementById("modalBody").innerHTML = team.strDescriptionEN
 
         card.getElementsByClassName("btn")[0].addEventListener("click", ()=> modalSetup(country.country+"-"+team.idTeam));
 
@@ -340,7 +338,7 @@ const matchSelection = (match) => {
     
 
     /*Agregar datos al storage*/
-    const bet = new Apuesta(country, team1, team2, selection, factor, id)
+    const bet = new Apuesta(country, team1, team2, selection, factor, id, 0)
     let repetido = false
 
     if (localStorage.length > 0) {
@@ -395,7 +393,27 @@ const confirmarMonto = (id) => {
     validarMonto(input);
 }
 
-const renderBets = async () => {
+const handleConfirmarBet = (idApuesta, idMonto) => {
+    const monto = Number(document.getElementById(idMonto).value);
+    const apuestas = JSON.parse(localStorage.getItem('bets'));
+    const apuesta = apuestas.filter(apuesta => String(apuesta.id) === String(idApuesta));
+    apuesta.monto = monto;
+    const montos = {
+        montoApuesta: monto,
+        montoGanancia: monto*Number(apuesta[0].factor)/100
+    };
+    const montoTotalElement = document.getElementById('montoTotal');
+    let montoTotal = Number(montoTotalElement.textContent) || 0;
+    montoTotal += monto;
+    montoTotalElement.textContent = montoTotal;
+
+    const gananciaAcumuladaElement = document.getElementById('gananciaAcumulada');
+    let gananciaAcumulada = Number(gananciaAcumuladaElement.textContent) || 0;
+    gananciaAcumulada += montos.montoGanancia;
+    gananciaAcumuladaElement.textContent = gananciaAcumulada;
+};
+
+const renderBets = async() => {
 
     limpiarBets();
 
@@ -433,7 +451,6 @@ const renderBets = async () => {
 
         let montoId = teamNode1[0].strTeam;
 
-        // const apuesta = document.getElementsByClassName("cart")[0];
         const apuesta = document.getElementById("bet-list");
         const divApuesta = document.createElement("div");
         divApuesta.className = "apuesta";
@@ -460,7 +477,7 @@ const renderBets = async () => {
                                 <div class="monto">
                                     <div class="custom-input">
                                         <input type="number" class="form-control" id="${montoId}" placeholder="10000">
-                                        <button type="button" onclick='confirmarMonto("${montoId}")'>Confirmar</button>
+                                        <button type="button" onclick='handleConfirmarBet("${bet.id}","${montoId}")'>Confirmar</button>
                                     </div>
                                 </div>
                         `
@@ -488,7 +505,6 @@ const renderBets = async () => {
         });
 
     }
-    // )
     
 }
 
@@ -498,6 +514,34 @@ const updateBetCount = () => {
     document.getElementById('bet_count').innerHTML = countApuestas;
 }
 
+const handleConfirmBets = () =>{
+    Swal.fire({
+        title: 'Apuestas confirmadas',
+        text: 'Sus apuestas fueron confirmadas y estan listas. ¡Mucha suerte!',
+        icon: 'success',
+        iconColor: '#008170',
+        confirmButtonText: 'Cerrar',
+        confirmButtonColor: '#008170'
+      });
+}
+
+const handleCancelBets = () =>{
+    Swal.fire({
+        title: '¿Desea eliminar sus apuestas?',
+        text: 'Se borraran todas sus apuestas',
+        icon: 'warning',
+        iconColor: '#008170',
+        showCancelButton: true,
+        confirmButtonText: 'Anular apuestas',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#008170'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.removeItem('bets');
+            limpiarBets();
+        } 
+      })
+}
 const renderDetalleApuestas = () => {
     const countApuestas = document.getElementById('bet-list').childElementCount;
     const detalle = document.getElementById("detalleApuestas");
@@ -511,7 +555,12 @@ const renderDetalleApuestas = () => {
     divDetalle.innerHTML = `<div class="card-body">
     <h5 class="card-title">Detalle de apuestas</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">Usted tiene <span id="bet_count">${countApuestas}</span> apuestas </h6>
-    
+    <h6>Monto total apostado: $<span id="montoTotal">0</span></h6>
+    <h6>Ganancia acumulada: $<span id="gananciaAcumulada">0</span></h6>
+    <div class="botones">
+        <button type="button" class="buttonBets" onClick= 'handleConfirmBets()'>Confirmar</button>
+        <button type="button" class="buttonBetsCancel" onClick= 'handleCancelBets()' >Anular</>
+    </div>
   </div>`
     detalle.appendChild(divDetalle);
 }
